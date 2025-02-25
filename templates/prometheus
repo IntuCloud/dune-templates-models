@@ -1,0 +1,19 @@
+const userData = `#!/bin/bash
+set -e
+sudo apt update && sudo apt upgrade -y
+sudo apt-get install -y ca-certificates curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+cat <<EOF | sudo tee /home/ubuntu/prometheus.yml > /dev/null
+global:
+  scrape_interval: 15s
+  external_labels:
+    monitor: 'codelab-monitor'
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+EOF
+sudo docker run -d -p 9090:9090 -v /home/ubuntu/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus --config.file=/etc/prometheus/prometheus.yml
+`;
