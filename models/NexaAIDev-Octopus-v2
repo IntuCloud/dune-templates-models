@@ -1,0 +1,19 @@
+const userData = `#!/bin/bash
+set -e
+sudo apt update && sudo apt upgrade -y
+sudo apt-get install -y ca-certificates curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo apt update
+sudo apt install -y nvidia-container-toolkit
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+docker run -d --runtime=nvidia --gpus=all \
+    --name=my_vllm_container \
+    -v ~/.cache/huggingface:/root/.cache/huggingface \
+    --env "HUGGING_FACE_HUB_TOKEN=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" \
+    -p 8000:8000 \
+    --ipc=host \
+    vllm/vllm-openai:latest \
+    --model NexaAIDev/Octopus-v2
+`;
