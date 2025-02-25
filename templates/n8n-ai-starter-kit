@@ -1,0 +1,11 @@
+const userData = `#!/bin/bash
+set -e
+sudo apt update && sudo apt upgrade -y
+git clone https://github.com/n8n-io/self-hosted-ai-starter-kit.git || { echo "Git clone failed"; exit 1; }
+cd self-hosted-ai-starter-kit || { echo "Failed to change directory"; exit 1; }
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo docker compose --profile cpu up -d
+`;
