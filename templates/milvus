@@ -1,0 +1,9 @@
+const userData = `#!/bin/bash
+set -e
+sudo apt update && sudo apt upgrade -y
+sudo apt-get install -y ca-certificates curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+wget https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose.yml -O docker-compose.yml
+sudo docker compose up -d
+`;
