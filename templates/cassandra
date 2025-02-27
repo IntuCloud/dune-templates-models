@@ -6,5 +6,8 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 sudo docker pull cassandra:latest
 sudo docker run -d --name cass_cluster cassandra:latest
+until sudo docker exec cass_cluster cqlsh -e "DESCRIBE KEYSPACES"; do
+    sleep 10
+done
 sudo docker exec -it cass_cluster cqlsh
 `;
