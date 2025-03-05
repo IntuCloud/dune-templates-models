@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
-sudo apt update && sudo apt upgrade -y
-sudo apt-get install -y ca-certificates curl
+apt update && sudo apt upgrade -y
+apt-get install -y ca-certificates curl
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
-sudo docker run -d \
+docker run -d \
   --name photoprism \
   --security-opt seccomp=unconfined \
   --security-opt apparmor=unconfined \
