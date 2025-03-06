@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-apt update && sudo apt upgrade -y
+apt update && apt upgrade -y
 apt-get install -y ca-certificates curl
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
